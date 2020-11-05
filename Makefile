@@ -143,3 +143,8 @@ doctest:
 	$(SPHINXBUILD) -b doctest $(ALLSPHINXOPTS) $(BUILDDIR)/doctest
 	@echo "Testing of doctests in the sources finished, look at the " \
 	      "results in $(BUILDDIR)/doctest/output.txt."
+
+markdown:
+	@echo "Started generating documentation in the Markdown format"
+	@sphinx-build -b markdown source build/markdown
+	@echo "Successfully generated Markdown output in the 'build/markdown' directory."
