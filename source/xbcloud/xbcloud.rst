@@ -5,7 +5,7 @@ The xbcloud Binary
 ================================================================================
 
 The purpose of |xbcloud| is to download and upload full or part of |xbstream|
-archive from/to cloud. |xbcloud| will not overwrite the backup with the same
+archive from/to the cloud. |xbcloud| will not overwrite the backup with the same
 name. |xbcloud| accepts input via a pipe from |xbstream| so that it can be
 invoked as a pipeline with |xtrabackup| to stream directly to the cloud without
 needing a local storage.
@@ -23,6 +23,7 @@ S3 API.
 Version specific information
 ================================================================================
 
+- 2.4.21 - Added s3-storage-class and google-storage-class
 - 2.4.14 - Added the support of |s3|, |minio| and |gcs| storage types.
 - 2.3.1-beta1 - Implemented ability to store *xbcloud* parameters in a
   :file:`.cnf` file
@@ -114,6 +115,18 @@ The following options are available when using |s3|:
    * - --s3-bucket-lookup = <AUTO|PATH|DNS>
      - Specify whether to use **bucket.endpoint.com** or *endpoint.com/bucket**
        style requests. The default value is AUTO. In this case, |xbcloud| will probe.
+   * - --s3-storage-class=<name>
+     - Specify the s3 storage class. The name options are the following: 
+     
+       * STANDARD
+       * STANDARD_IA
+       * GLACIER
+       
+       Also supports using custom s3 implementations such as MinIO or CephRadosGW.
+       
+       .. seealso::
+       
+        `Amazon S3 storage classes <https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html>`_
 
 Creating a full backup with |minio|
 ================================================================================
@@ -157,7 +170,21 @@ The following options are available when using |gcs|:
 - --google-access-key = <ACCESS KEY ID>
 - --google-secret-key = <SECRET ACCESS KEY>
 - --google-bucket = <BUCKET NAME>
+- --google-storage-class=name
 
+.. note::
+
+    The Google storage class name options are the following:
+    
+    * STANDARD
+    * NEARLINE
+    * COLDLINE
+    * ARCHIVE
+    
+    .. seealso::
+    
+     `Google storage classes <https://cloud.google.com/storage/docs/storage-classes>`_
+    
 Supplying parameters
 ================================================================================
 
